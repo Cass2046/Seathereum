@@ -1,10 +1,9 @@
 //P5 JS framework 
 //let creature;
 //var pipes = [];
-// var color;
 
 function setup() {
-    createCanvas(600, 400);
+    createCanvas(800, 600);
     //creature = new creature(200, 200, 40);
     //pipes.push(new pipes());
 }
@@ -12,9 +11,12 @@ function setup() {
 function draw() {
     // color=map(creature.x,0,600,255)
     // background(color);
-    background(250, 250, 100);
-    fill(250, 200, 200);
-    ellipse(60, 120, 20, 40);
+    background(100, 120, 180);
+    fill(180, 20, 90);
+    ellipse(50, 120, 35, 40);
+    fill (100,200,100);
+    rect(80,180,50,500);
+    rect(80,-2,50,80);
     // for (var i =pipes.length-1; i>=0; i--){
     //     pipes[i].show();
     //     pipes[i].update();

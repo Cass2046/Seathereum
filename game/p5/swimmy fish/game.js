@@ -2,13 +2,13 @@
 var creature;
 var pipes = [];
 function setup() {
-    createCancas(400, 600);
+    createCancas(600, 800);
     creature = new creature();
     pipes.push(new pipes());
 }
 
 function draw() {
-    background(0);
+    background(100);
 
     for (var i =pipes.length-1; i>=0; i--){
         pipes[i].show();
