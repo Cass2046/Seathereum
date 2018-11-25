@@ -1,8 +1,11 @@
-
-//var pipes = [];
 var creature={
     x:50,
     y:120,
+    // this.y = height/2,
+    // this.x = 50,
+    // this.gravity = 0.7,
+    // this.lift =-4,
+    // this.velocity = 0,
 };
 
 function setup() {
@@ -12,19 +15,26 @@ function setup() {
 }
 
 function draw() {
-    // color=map(creature.x,0,600,255)
-    // background(color);
-    background(100, 120, 180);
-
+    // background color tutorial 1-7 map func
+    colorR=map(creature.x, 0, 600, 0, 200);
+    background(colorR/2, 120, 180);
+    
+    //colorG=map(creature.y, );
     fill(180, 20, 90);
     ellipse(creature.x, creature.y, 35, 40);
+
+    if (mouseIsPressed){
+       creature.y=creature.y-9;
+    }
 
     fill (100,200,100);
     rect(120,180,50,500);
     rect(120,-2,50,80);
 
-    creature.x=creature.x+1;
-    creature.y=creature.y+0.8;
+    creature.x=creature.x+3;
+    creature.y=creature.y+2.7;
+
+   
     // for (var i =pipes.length-1; i>=0; i--){
     //     pipes[i].show();
     //     pipes[i].update();
