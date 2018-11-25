@@ -8,6 +8,15 @@ var creature={
     // this.velocity = 0,
 };
 
+var coral={
+    x:300,
+    y1:260,
+    y2:-1,
+    width:50,
+    length1: 400,
+    length2: 100,
+};
+
 function setup() {
     createCanvas(800, 600);
     //creature = new creature(200, 200, 40);
@@ -28,11 +37,13 @@ function draw() {
     }
 
     fill (100,200,100);
-    rect(120,180,50,500);
-    rect(120,-2,50,80);
+    rect(coral.x,coral.y1,coral.width,coral.length1);
+    //rect(coral.x,-2,coral.y2,coral.width, coral.length2);
 
-    creature.x=creature.x+3;
-    creature.y=creature.y+2.7;
+    // creature.x=creature.x+3;
+     creature.y=creature.y+2.7;
+
+    coral.x=coral.x-1;
 
    
     // for (var i =pipes.length-1; i>=0; i--){
