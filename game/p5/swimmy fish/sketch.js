@@ -32,12 +32,16 @@ function draw() {
     // background color tutorial 1-7 map func
     // colorR=map(creature.x, 0, 600, 0, 200);
     // background(colorR/2, 120, 200);
-    background(150, 190, 190);
+    background(180, 190, 200);
     stroke(255);
     strokeWeight(3);
     fill(40, 120, 200);
     triangle(0, 0, 400, 0, 0, 270);
     triangle(400, 0, 800, 0, 800, 270);
+    //eyes
+    fill(20,50,60);
+    triangle(168, 160, 225, 120, 320, 190);
+    triangle(633, 160, 580, 120, 480, 190);
 
     //mouth
     fill(200, 30, 50);
@@ -48,18 +52,31 @@ function draw() {
     //upteeth
     triangle(upteeth.x, upteeth.y, upteeth.x+40, upteeth.y, upteeth.x+12, upteeth.y+80);
     triangle(upteeth.x+50, upteeth.y, upteeth.x+90, upteeth.y, upteeth.x+62, upteeth.y+90);
-    triangle(upteeth.x+290, upteeth.y, upteeth.x+340, upteeth.y, upteeth.x+320, upteeth.y+90);
+
     //downteeth
     triangle(downteeth.x, downteeth.y, downteeth.x+40, downteeth.y, downteeth.x+12, downteeth.y-80);
     triangle(downteeth.x+100, downteeth.y, downteeth.x+160, downteeth.y, downteeth.x+140, downteeth.y-120);
     //upteeth.x=upteeth.x+100;
+
+    //more upteeth
+    for (var x=280; x<=780; x=x+110){
+        fill(255);
+        triangle(x, 290, x+40, 290, x+12, 390);
+    }
+    //more downteeth
+    for (var y=320; y<=780; y=y+120){
+        fill(255);
+        triangle(y, 565, y+40, 565, y+12, 445);
+    }
+
+
     
     //creature
     fill(110, 200, 90);
-    ellipse(creature.x, creature.y, 35, 40);
+    ellipse(creature.x, creature.y, 20, 20);
 
     if (mouseIsPressed){
-       creature.y=creature.y-9;
+       creature.y=creature.y-5.5;
     }
 
     // fill (190,100,200);
