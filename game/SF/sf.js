@@ -10,12 +10,32 @@ var bg = new Image();
 var plantNorth = new Image();
 var plantSouth = new Image();
 
+var grass = new Image();
+var vine = new Image();
+var ubrown = new Image();
+var clover = new Image();
+var redflower = new Image();
+var leave = new Image();
+var upa = new Image();
+var upb = new Image();
+var upc = new Image();
+var upd = new Image();
+
 //source path
 creature.src = "pic/gost.gif";
 bg.src = "pic/bg.jpeg";
 plantNorth.src = "pic/upplant.png";
 plantSouth.src = "pic/downplant.png";
-
+grass.src = "pic/grass.png";
+vine.scr = "pic/vine.png";
+ubrown = "pic/upbrown.png";
+clover = "pic/clover.png";
+redflower = "pic/redflower.png";
+leave = "pic/leave.png";
+upa = "pic/upa.png";
+upb = "pic/upa.png";
+upc = "pic/upa.png";
+upd = "pic/upa.png";
 
 var gap = 90;
 var constant;
@@ -44,14 +64,37 @@ function moveUp(){
     //jp.play();
 }
 
-// plant coordinates
-var plant = [];
+/*
+* barriers function and coordinates
+*/ 
+var barr = [leave, upa, upb, upc, upd, vine, ubrown];
+//random pick a barrier from barr array
+barr [Math.floor(Math.random() * barr.length)] = {
+    x : Math.floor(Math.random() * cvs.width * 200),
+    y : Math.floor(Math.random() * cvs.height * 100)
+};
 
+// function drawBarr(){
+//     for (var i = 0; i < 750; i++){
+//         sf.drawImage(barr, barr[i].x, barr[i].y);
+//         console.log(barr[i].x);
+//         barr[i].x--;
+//     }
+
+//     if(barr[i].x == 100){
+//         barr.push({
+//             x : Math.floor(Math.random() * 600),
+//             y : Math.floor(Math.random() * 200) + Math.floor(Math.random() * 50)
+//         });
+//     }
+// }
+
+
+var plant = [];
 plant[0] = {
     x : cvs.width,
     y : 0
 };
-
 
 /*
 / draw images
@@ -59,23 +102,34 @@ plant[0] = {
 function draw(){
     //background
     sf.drawImage(bg,0,0); 
-    
+
     //plant
     for(var i = 0; i < plant.length; i++){
         constant = plantNorth.height + gap;
         sf.drawImage(plantNorth,plant[i].x,plant[i].y);
         sf.drawImage(plantSouth,plant[i].x,plant[i].y + constant);
+        
+
+        console.log(plant[i].x);
+            // console.log(plant[i].height);
+            // console.log(plant[i].width);
              
         plant[i].x--;
         
-        if(plant[i].x == 80){
+        if(plant[i].x == 90){
             //push new plant with random function
             plant.push({
-                x : cvs.width - 10,
-                y : Math.floor(Math.random() * plantNorth.height) - plantNorth.height
+                x : cvs.width - Math.floor(Math.random() *  10),
+                y : Math.floor(Math.random() * 100) - Math.floor(Math.random() * 50)
             });
         }
 
+        if(plant[i].x == 100){
+            barr.push({
+                x : Math.floor(Math.random() * 600),
+                y : Math.floor(Math.random() * 200) + Math.floor(Math.random() * 50)
+            });
+        }
         /*
         * Game over rulea
         */
@@ -87,6 +141,7 @@ function draw(){
             ){
                 location.reload();
         }
+        
         //touch the ground
         if(CY + creature.height > cvs.height - 8 ){
             location.reload();
