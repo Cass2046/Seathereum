@@ -1,35 +1,51 @@
 import React from 'react';
+import {Route} from 'react-router-dom';
+
+import Video from './components/about/Video';
+import Home from './components/home/Home';
+import Data from './components/test/Data';
+import {routes as gameRoutes} from './components/games';
 import Market from './components/market/Market';
 
 const routes = [
   {
+    component: Home,
     exact: true,
-    path: '/',
-    render: () => <h1 className="display-1 text-center">home</h1>
+    path: '/'
   },
   {
-    path: '/market',
-    render: Market
+    component: Video,
+    path: '/about'
   },
   {
-    path: '/about',
-    render: () => (
-      <div align="center">
-        <iframe
-          src="https://drive.google.com/file/d/1kIUDdWmEf_KLF_cqtOh8LWGXq21otcPK/preview"
-          width="640"
-          height="480"
-          title="video"
-          allowFullScreen="true"
-          frameBorder="0px"
-        />
-      </div>
-    )
+    component: Market,
+    path: '/market'
   },
+  gameRoutes,
   {
-    path: '/creature/:id',
-    render: () => <h1 className="display-1 text-center">creature info</h1>
+    component: Data,
+    path: '/test'
   }
 ];
 
-export default routes;
+const denestRoutes = (routes) =>
+  routes.reduce((acc, route) => {
+    const {routes, ...rest} = route;
+    acc.push({...rest});
+    return routes
+      ? acc.concat(
+          denestRoutes(
+            routes.map((sub) => {
+              const {path: subpath, ...rest} = sub;
+              return {...rest, path: `${route.path}${subpath}`};
+            })
+          )
+        )
+      : acc;
+  }, []);
+
+export default () => {
+  return denestRoutes(routes).map(({path, component: C}, i) => (
+    <Route key={i} path={path} render={(props) => <C {...props} />} />
+  ));
+};

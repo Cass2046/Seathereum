@@ -1,20 +1,20 @@
 import React from 'react';
-import Banner from './components/Banner';
-import Navbar from './components/Navbar';
-import routes from './routes';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {BrowserRouter, Switch, Redirect} from 'react-router-dom';
+import Routes from './routes';
+
+import {Banner, Navbar} from './components/common';
 
 const App = () => (
-  <>
-    <Banner />
-    <Navbar />
-    <Switch>
-      {routes.map((route, i) => (
-        <Route key={i} {...route} />
-      ))}
-      <Redirect from="*" to="/" />
-    </Switch>
-  </>
+  <BrowserRouter>
+    <>
+      <Banner />
+      <Navbar />
+      <Switch>
+        <Redirect from="/home" to="/" />
+        <Routes />
+      </Switch>
+    </>
+  </BrowserRouter>
 );
 
 export default App;

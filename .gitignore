@@ -83,3 +83,7 @@ typings/
 
 # vs code workspace config
 .vscode
+
+.tern-port
+
+truffle/build*

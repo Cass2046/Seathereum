@@ -1,17 +1,21 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import inkfish from '../../inkfish.png';
 
-const Card = ({name, desc, id}) => (
-  <Link
-    to={`/creature/${id}`}
-    className="card btn btn-light border-0 shadow"
-    style={{borderRadius: '5%'}}>
-    <img className="card-img-top" src="card.png" alt="" />
-    <div className="card-body text-center">
-      <h3 className="card-title text-primary">{name}</h3>
-      <p className="card-text">{desc}</p>
+import './Card.css';
+
+const Card = (props) => {
+  const {name, desc} = props;
+  return (
+    <div className="card text-center border-0 bg-light">
+      <div className="front">
+        <img className="card-img-top w-auto" src={inkfish} alt="" />
+      </div>
+      <div className="back card-body w-100 position-absolute">
+        <h4 className="card-title">{name}</h4>
+        <p className="card-text">{desc}</p>
+      </div>
     </div>
-  </Link>
-);
+  );
+};
 
 export default Card;

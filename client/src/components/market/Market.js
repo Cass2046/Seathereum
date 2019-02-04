@@ -1,5 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Card from './Card';
+
+// TODO
+// in the future creatures will get pulled from the network will probably be
+// done in market constructor
 
 const creatures = [
   {
@@ -24,12 +28,20 @@ const creatures = [
   }
 ];
 
-const Market = () => (
-  <div className="container card-deck m-auto">
-    {creatures.map((creature, i) => (
-      <Card key={i} {...creature} />
-    ))}
-  </div>
-);
+class Market extends Component {
+  render() {
+    return (
+      <div className="container">
+        <div className="row">
+          {creatures.map((creature, i) => (
+            <div className="col-sm-6 col-md-4 col-lg-3" key={i}>
+              <Card {...creature} />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
 
 export default Market;
