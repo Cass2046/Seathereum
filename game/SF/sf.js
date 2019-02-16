@@ -45,7 +45,7 @@ grass.src = "pic/grass.png";
 root.src = "pic/root.png";
 leave.src = "pic/leave.png";
 
-var gap = 90;
+var gap = 100;
 var constant;
 var CX = 80;
 var CY = 120;
@@ -66,7 +66,7 @@ var score = 0;
 */
 document.addEventListener("keydown",moveUp);
 function moveUp(){
-    CY = CY - 20;
+    CY = CY - 26;
     //jp.play();
 }
 
@@ -88,12 +88,10 @@ up_pos[0] = {
 */ 
 var down_barr = [down1, down2, down3, down4, down5, grass, root, leave, grass, down2];
 //random pick a barrier from barr array
-var down_plant = down_barr[Math.round(Math.random() * 10)];
+var down_plant = down_barr[Math.floor(Math.random() * 10)];
 var down_pos = [];
 down_pos[0] = {
-    // x : cvs.width - 160,
-    // y : 320 + Math.floor(Math.random() * 90,
-    // // z : Math.floor(Math.random() * 10)
+    x : cvs.width - 160
 };
 
 var plant = [];
@@ -113,25 +111,27 @@ function draw(){
     //plant
     for(var i = 0; i < plant.length; i++){
         //test draw plants
-        constant = up2.height + gap;
+        constant = up_plant.height + gap;
         sf.drawImage(
             up_plant, plant[i].x, plant[i].y
             );
         sf.drawImage(
-            down_plant, plant[i].x, plant[i].y + 360
+            down_plant, plant[i].x, plant[i].y + constant
             );
         plant[i].x--;
         if (plant[i].x == 150){
             // console.log(up2.height, up2.width); //170-52
             // console.log(down2.height, down2.width);  //184-173
-            console.log(creature.height, creature.width) //50-50
+            // console.log(down_plant.height, down_plant.width) //184-
+            console.log(down_plant.height )
             plant.push(
                 {
-                    x : cvs.width - 10,
-                    y : Math.floor(Math.random()*100)
+                    x : cvs.width,
+                    y : Math.floor(Math.random()*up_plant.height) - up_plant.height
                 }
             );
         }
+   
         // if(up_pos[i].x == 190){
         //     //push new plant with random function
         //     up_pos.push({
@@ -154,14 +154,15 @@ function draw(){
         //hit the plant
         if (CX + creature.width >= plant[i].x 
             && CX <= plant[i].x + up_plant.width
-            && (CY <= plant[i].y + up_plant.height || CY + creature.height >= cvs.height || CY + creature.height >= down_plant.y)
+            && (CY <= plant[i].y + up_plant.height || CY + creature.height >= cvs.height - plant[i].y)
             ){
+                
                 location.reload();
         }
 
         // if (CX + creature.width >= plant[i].x 
         //     && CX < plant[i].x + down_plant.width 
-        //     && CY > down_plant.y){
+        //     && CY + creature.height >= down_plant.height){
         //         console.log("touch the downplant at", down_plant.x, down_plant.y);
         //     location.reload();
         // }
@@ -174,7 +175,7 @@ function draw(){
         /*
         * record the score
         */
-        if(plant[i].x == 8){
+        if(plant[i].x == 10){
             score++;
             //scor.play();
         }
