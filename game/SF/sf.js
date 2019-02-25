@@ -160,8 +160,10 @@ function draw_up(){
             && CY <= upplant[i].y + up_plant.height)
             || CY + creature.height > cvs.height - 8 //touch the ground
             ){
-                windown.location.href = 'google.com';
-                location.reload();
+                //redirect to the menu page
+                //windown.location.href = 'menu.html';
+                self.location = "menu.html";
+                //location.reload();
         }
         
         /*
