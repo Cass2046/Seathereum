@@ -41,12 +41,12 @@ down3.src = "pic/down3.png"; //135, 199
 down4.src = "pic/down4.png"; //121, 199
 down5.src = "pic/down5.png"; //140, 205
 
-var gap = 140;
+var gap = 110;
 var constant;
 var CX = 80;
 var CY = 120;
-// var SX = ;
-// var SY = ;
+var SX = 500;
+var SY = 200;
 var gravity = 1.2;
 var score = 0;
 var s = 60;
@@ -72,12 +72,12 @@ function moveUp(){
 /*
 * North Plant function and coordinates
 */
-var up_barr = [up1, up2, up3, up4, up4, up1, up2, up3, up4, up1];
-//random pick a barrier from barr array
+var up_barr = [up1, up1, up3, up4, up4, up1, up3, up3, up4, up1];
 var up_plant = up_barr[Math.floor(Math.random() * 10)];
+var upb = up_barr[Math.floor(Math.random() * 10)];
 var up_pos = [];
 up_pos[0] = {
-    x : cvs.width - 120,
+    x : cvs.width - 100,
     y : -35,
     i : Math.floor(Math.random() * 5)
 };
@@ -86,8 +86,6 @@ up_pos[0] = {
 * South Plant function and coordinates
 */ 
 var down_barr = [down1, down2, down3, down4, down5, down1, down2, down3, down4, down5];
-// var down_barr = [down3, down3, down3, down5, down5, down5, down5, down5, down5, down5];
-//random pick a barrier from barr array
 var down_plant = down_barr[Math.floor(Math.random() * 10)];
 var down_pos = [];
 down_pos[0] = {
@@ -99,42 +97,36 @@ upplant[0] = {
     x : cvs.width,
     y : 0
 };
+var dplant = [];
+dplant[0] = {
+    x : cvs.width + 120,
+    y : 0 
+};
 var s = [];
 s[0] = {
     x :cvs.width,
     y : 300  
 };
-// var dplant = [];
-// dplant[0] = {
-//     x : cvs.width,
-//     y : cvs.height - 300         
-// };
 
-// function render(){
 
-// };
-// setInterval(function(){
-
-// }, 1000/s);
 /*
 / draw images
 */
 function draw_up(){
     //background
     sf.drawImage(bg,0,0); 
-
+    
     //plant
     for(var i = 0; i < upplant.length; i++){
         //test draw plants
         constant = up_plant.height + gap;
         sf.drawImage(
-            up_plant, upplant[i].x, upplant[i].y
+            up_plant, upplant[i].x, upplant[i].y 
             );
-        // sf.drawImage(
-        //     down_plant, plant[i].x, plant[i].y + constant
-        //     );
-        upplant[i].x--;
-        
+        sf.drawImage(
+            down_plant, upplant[i].x + 120, upplant[i].y+ constant
+            );
+        upplant[i].x--; 
         //var timer = setTimeout(callShark, 3000);
         // function callShark(){
         //     sf.drawImage(
@@ -142,12 +134,12 @@ function draw_up(){
         //         );
         // }
 
-        if (upplant[i].x == 200){
-            console.log(up_plant.width, up_plant.height)
+        if (upplant[i].x == 180){
+            console.log(upplant[i].y)
             upplant.push(
                 {
                     x : cvs.width,
-                    y : Math.floor(Math.random()*up_plant.height) - up_plant.height
+                    y : Math.floor(Math.random()* 80) - 140
                 }
             );
         }
@@ -155,15 +147,15 @@ function draw_up(){
         /*
         * Game over rule
         */
-        if ((CX + creature.width >= upplant[i].x 
-            && CX <= upplant[i].x + up_plant.width
-            && CY <= upplant[i].y + up_plant.height)
-            || CY + creature.height > cvs.height - 8 //touch the ground
+        if ((CX + creature.width >= upplant[i].x && CX <= upplant[i].x + up_plant.width 
+            && CY < upplant[i].y + up_plant.height - 10) 
+            ||(CY >= upplant[i].y + constant 
+            && CX + creature.width >= upplant[i].x + 115
+            && CX + creature.width <= upplant[i].x + 110 + down_plant.width )
+            || (CY + creature.height > cvs.height) //touch the ground
             ){
-                //redirect to the menu page
-                //windown.location.href = 'menu.html';
                 self.location = "menu.html";
-                //location.reload();
+                // location.reload();
         }
         
         /*
