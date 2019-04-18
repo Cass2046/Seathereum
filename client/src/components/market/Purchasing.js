@@ -26,7 +26,7 @@ class Purchasing extends Component {
     render() { 
         return (  
             <section>
-                <h1>Creature information</h1>
+                <h1> </h1>
                 <input type="button" value="Open" onClick={() => this.openModal()} />
                 <Modal visible={this.state.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                     <div>

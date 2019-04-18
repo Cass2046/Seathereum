@@ -3,10 +3,10 @@
   transform-style: preserve-3d;
 }
 
-.card:hover,
+/* .card:hover,
 .back {
   transform: rotateY(180deg);
-}
+} */
 
 .front,
 .back {
